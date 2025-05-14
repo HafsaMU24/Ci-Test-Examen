@@ -12,7 +12,6 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: ci_db
-          MYSQL_PASSWORD: Mysecret@2024
         ports:
           - 3306:3306
         options: >-
