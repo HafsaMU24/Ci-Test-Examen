@@ -4,20 +4,29 @@ on: [push,pull_request]
 
 jobs:
    build-and-test:
-    runs-on: ubuntu-latest
+   on-push:
+     if: github.event_name == 'push'
+     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+     steps:
+      - uses: actions/checkout@v4
+      - name: print status
+        run: echo "push detected"
 
-      - name: set up java 17
-        uses: actions/setup-java@v4
+
+   on-pull-request:
+     if: github.event_name == 'pull-request'
+     runs-on: ubuntu-latest
+
+     steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
         with:
                distribution: 'temurin'
                java-version: '17'
 
       - name: Build and Test with Maven
-        run: mvn clean test
+        run: mvn clean build
 
 
 
