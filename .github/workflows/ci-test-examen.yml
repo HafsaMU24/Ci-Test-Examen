@@ -11,7 +11,9 @@ jobs:
         image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: ci_db
+          MYSQL_DATABASE: ci_test_db
+          MYSQL_USER: root
+          MYSQL_PASSWORD: Mysecret@2024
         ports:
           - 3306:3306
         options: >-
@@ -21,7 +23,7 @@ jobs:
           --health-retries=5
 
     env:
-      DB_URL: jdbc:mysql://localhost:3306/ci_db
+      DB_URL: jdbc:mysql://localhost:3306/ci_test_db
       DB_USER: root
       DB_PASSWORD: Mysecret@2024
 
