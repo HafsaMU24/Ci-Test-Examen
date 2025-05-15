@@ -13,7 +13,7 @@ jobs:
         with:
             distribution: 'temurin'
             java-version: '17'
-      - name: print  PR success
+      - name: Build with maven
         run: echo "pull request successful!"
 
    on-push:
@@ -23,6 +23,18 @@ jobs:
        - uses: actions/checkout@v4
        - name: print push status
          run: echo "push detected"
+
+   test:
+     runs-on: ubuntu-latest
+     steps:
+       - uses: actions/checkout@v4
+       - uses: actions/setup-java@v4
+         with:
+           distribution: 'temurin'
+           java-version: '17'
+       - name: Build and Test
+         run: mvn clean test
+
 
 
 
