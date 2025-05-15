@@ -1,4 +1,4 @@
-name: Workflow ci-test-examen With H2
+name: Workflow ci-test-examen yml With H2
 
 on: [push,pull_request]
 
