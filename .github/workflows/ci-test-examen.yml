@@ -3,21 +3,25 @@ name: Workflow ci-test-examen With H2
 on: [push,pull_request]
 
 jobs:
-   build-on-pull-request:
+   on-pull-request:
      if: github.event_name == 'pull-request'
      runs-on: ubuntu-latest
 
      steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+            distribution: 'temurin'
+            java-version: '17'
       - name: print  PR success
         run: echo "pull request successful!"
 
-   print:
+   on-push:
      if: github.event_name == 'push'
      runs-on: ubuntu-latest
      steps:
        - uses: actions/checkout@v4
-       - name: print push success
+       - name: print push status
          run: echo "push detected"
 
 
