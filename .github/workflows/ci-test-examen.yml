@@ -3,7 +3,7 @@ name: Workflow ci-test-examen With H2
 on: [push,pull_request]
 
 jobs:
-   build-on-push:
+   build-on-pull-request:
      if: github.event_name == 'pull-request'
      runs-on: ubuntu-latest
 
