@@ -40,12 +40,12 @@ public class UserService {
     public void deleteUser(Long id){
         userRepository.deleteById(id);
     }
-
+// tilldela en uppgift Task till User baserat på användarens ID
     public Task assignTaskToUser(Long userId, Task task) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + userId));
-        task.setUser(user);
-        return taskRepository.save(task);
+        User user = userRepository.findById(userId) // försaka hitta en user med userid
+                .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + userId)); // Kaster ett felmeddelande (skydder mot att försaka tilldel en upgifte till en user)
+        task.setUser(user); // länkas uppgiften till den användaren
+        return taskRepository.save(task); // uppgiften tilldelead och lagras med rätt koppling till användaren
     }
 
 }
