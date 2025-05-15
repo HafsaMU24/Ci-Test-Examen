@@ -40,7 +40,7 @@ jobs:
            java-version: '17'
 
        - name: Build with maven
-         run: mvn -e -x clean install
+         run: mvn clean test
 
 
 
