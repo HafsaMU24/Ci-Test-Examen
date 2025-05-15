@@ -11,6 +11,12 @@ jobs:
       - uses: actions/checkout@v4
       - name: echo push
         run: echo "push detected"
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Build with maven (Push)
+        run: mvn -B clean install
 
 
    build-on-pull-request:
@@ -24,11 +30,13 @@ jobs:
                distribution: 'temurin'
                java-version: '17'
 
-      - name: Build with maven
-        run: mvn -e -x clean install
+      - name: Build with maven (PR)
+        run: mvn -B clean install
 
 
    test:
+     # Köras bara efter build-job beroende på event
+     needs: [build-on-push,build-on-pull-request]
      runs-on: ubuntu-latest
 
      steps:
@@ -38,7 +46,7 @@ jobs:
            distribution: 'temurin'
            java-version: '17'
 
-       - name: Build and test
+       - name: Run Test
          run: mvn clean test
 
 
