@@ -4,45 +4,23 @@ on: [push,pull_request]
 
 jobs:
    build-on-push:
-     if: github.event_name == 'push'
-     runs-on: ubuntu-latest
-
-     steps:
-      - uses: actions/checkout@v4
-      - name: echo push
-        run: echo "push detected"
-
-
-
-   build-on-pull-request:
      if: github.event_name == 'pull-request'
      runs-on: ubuntu-latest
 
      steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
-        with:
-               distribution: 'temurin'
-               java-version: '17'
+      - name: print  PR success
+        run: echo "pull request successful!"
 
-      - name: Build with maven (PR)
-        run: mvn -e -x clean install
-
-
-   test:
-     # Köras bara efter build-job beroende på event
-
+   print:
+     if: github.event_name == 'push'
      runs-on: ubuntu-latest
-
      steps:
        - uses: actions/checkout@v4
-       - uses: actions/setup-java@v4
-         with:
-           distribution: 'temurin'
-           java-version: '17'
+       - name: print push success
+         run: echo "push detected"
 
-       - name: Build with maven
-         run: mvn clean test
+
 
 
 
